@@ -1,0 +1,330 @@
+{
+  "metadata": {
+    "dashboard_title": "Indonesia Health Insight Dashboard",
+    "period": "2018–2023",
+    "last_updated": "2024",
+    "sources": [
+      {
+        "id": "kemenkes",
+        "name": "Kementerian Kesehatan Republik Indonesia",
+        "url": "https://www.kemkes.go.id",
+        "description": "Data profil kesehatan Indonesia, laporan tahunan kesehatan nasional"
+      },
+      {
+        "id": "bps",
+        "name": "Badan Pusat Statistik (BPS)",
+        "url": "https://www.bps.go.id",
+        "description": "Statistik kesehatan, data kependudukan, dan indikator sosial"
+      },
+      {
+        "id": "satu_data",
+        "name": "Satu Data Indonesia",
+        "url": "https://data.go.id",
+        "description": "Portal data terpadu pemerintah Indonesia"
+      },
+      {
+        "id": "ssgi",
+        "name": "Survei Status Gizi Indonesia (SSGI) – Kemenkes RI",
+        "url": "https://www.kemkes.go.id",
+        "description": "Survei nasional status gizi termasuk prevalensi stunting"
+      }
+    ]
+  },
+  "kpi": {
+    "total_population": {
+      "value": 277534122,
+      "unit": "jiwa",
+      "year": 2023,
+      "source": "bps"
+    },
+    "total_hospitals": {
+      "value": 3106,
+      "unit": "RS",
+      "year": 2023,
+      "source": "kemenkes"
+    },
+    "total_puskesmas": {
+      "value": 10317,
+      "unit": "unit",
+      "year": 2023,
+      "source": "kemenkes"
+    },
+    "stunting_prevalence": {
+      "value": 21.6,
+      "unit": "%",
+      "year": 2023,
+      "source": "ssgi"
+    }
+  },
+  "communicable_diseases": {
+    "trend": [
+      { "year": 2018, "dbd": 65602, "tbc": 566623, "malaria": 250644 },
+      { "year": 2019, "dbd": 138127, "tbc": 563879, "malaria": 250726 },
+      { "year": 2020, "dbd": 108303, "tbc": 351936, "malaria": 235606 },
+      { "year": 2021, "dbd": 73518,  "tbc": 385295, "malaria": 304607 },
+      { "year": 2022, "dbd": 131265, "tbc": 724309, "malaria": 311412 },
+      { "year": 2023, "dbd": 114720, "tbc": 809000, "malaria": 281625 }
+    ],
+    "by_province": [
+      { "province": "Jawa Barat",       "dbd": 26840, "tbc": 151672, "malaria": 120 },
+      { "province": "Jawa Timur",       "dbd": 16210, "tbc": 114350, "malaria": 210 },
+      { "province": "Jawa Tengah",      "dbd": 14520, "tbc": 98320,  "malaria": 180 },
+      { "province": "DKI Jakarta",      "dbd": 10280, "tbc": 72450,  "malaria": 95 },
+      { "province": "Sumatera Utara",   "dbd": 6340,  "tbc": 48210,  "malaria": 4820 },
+      { "province": "Banten",           "dbd": 5980,  "tbc": 44870,  "malaria": 320 },
+      { "province": "Sulawesi Selatan", "dbd": 4210,  "tbc": 38640,  "malaria": 9840 },
+      { "province": "Kalimantan Timur", "dbd": 3640,  "tbc": 22150,  "malaria": 8420 },
+      { "province": "Papua",            "dbd": 1240,  "tbc": 19870,  "malaria": 98450 },
+      { "province": "NTT",              "dbd": 2140,  "tbc": 21340,  "malaria": 46210 },
+      { "province": "Sumatera Selatan", "dbd": 3120,  "tbc": 28760,  "malaria": 7640 },
+      { "province": "Riau",             "dbd": 2870,  "tbc": 24310,  "malaria": 2140 }
+    ],
+    "source": "kemenkes",
+    "year": 2023
+  },
+  "maternal_child_health": {
+    "maternal_mortality_rate": {
+      "trend": [
+        { "year": 2018, "value": 305 },
+        { "year": 2019, "value": 299 },
+        { "year": 2020, "value": 293 },
+        { "year": 2021, "value": 7389 },
+        { "year": 2022, "value": 4005 },
+        { "year": 2023, "value": 3572 }
+      ],
+      "unit": "kasus/tahun",
+      "note": "Tahun 2021 terpengaruh pandemi COVID-19",
+      "source": "kemenkes"
+    },
+    "infant_mortality_rate": {
+      "trend": [
+        { "year": 2018, "value": 24.0 },
+        { "year": 2019, "value": 23.4 },
+        { "year": 2020, "value": 22.5 },
+        { "year": 2021, "value": 21.9 },
+        { "year": 2022, "value": 20.2 },
+        { "year": 2023, "value": 19.8 }
+      ],
+      "unit": "per 1.000 kelahiran hidup",
+      "source": "bps"
+    },
+    "immunization_coverage": {
+      "trend": [
+        { "year": 2018, "value": 57.9 },
+        { "year": 2019, "value": 60.1 },
+        { "year": 2020, "value": 56.4 },
+        { "year": 2021, "value": 62.8 },
+        { "year": 2022, "value": 68.4 },
+        { "year": 2023, "value": 71.5 }
+      ],
+      "unit": "%",
+      "source": "kemenkes"
+    },
+    "by_province": [
+      { "province": "DI Yogyakarta",    "mmr": 39,  "imr": 7.2,  "immunization": 92.4 },
+      { "province": "DKI Jakarta",      "mmr": 52,  "imr": 9.8,  "immunization": 88.6 },
+      { "province": "Jawa Tengah",      "mmr": 76,  "imr": 12.4, "immunization": 85.2 },
+      { "province": "Bali",             "mmr": 61,  "imr": 10.2, "immunization": 89.1 },
+      { "province": "Jawa Barat",       "mmr": 91,  "imr": 14.7, "immunization": 79.8 },
+      { "province": "Jawa Timur",       "mmr": 89,  "imr": 13.9, "immunization": 80.4 },
+      { "province": "Sumatera Utara",   "mmr": 143, "imr": 21.3, "immunization": 68.2 },
+      { "province": "NTT",              "mmr": 218, "imr": 28.4, "immunization": 52.6 },
+      { "province": "Papua",            "mmr": 285, "imr": 38.2, "immunization": 41.8 },
+      { "province": "Papua Barat",      "mmr": 261, "imr": 34.1, "immunization": 44.2 }
+    ],
+    "source": "kemenkes"
+  },
+  "nutrition": {
+    "stunting_trend": [
+      { "year": 2018, "value": 30.8 },
+      { "year": 2019, "value": 27.7 },
+      { "year": 2021, "value": 24.4 },
+      { "year": 2022, "value": 21.6 },
+      { "year": 2023, "value": 21.5 }
+    ],
+    "nutritional_status": [
+      { "status": "Stunting",    "value": 21.6 },
+      { "status": "Wasting",     "value": 7.7 },
+      { "status": "Underweight", "value": 17.1 },
+      { "status": "Overweight",  "value": 3.5 }
+    ],
+    "by_province": [
+      { "province": "NTT",              "stunting": 37.8 },
+      { "province": "Sulawesi Barat",   "stunting": 35.0 },
+      { "province": "Papua Barat",      "stunting": 34.6 },
+      { "province": "Aceh",             "stunting": 33.2 },
+      { "province": "Kalimantan Barat", "stunting": 31.4 },
+      { "province": "Kalimantan Selatan","stunting": 30.4 },
+      { "province": "Papua",            "stunting": 29.5 },
+      { "province": "Sulawesi Tengah",  "stunting": 29.7 },
+      { "province": "Gorontalo",        "stunting": 29.4 },
+      { "province": "Sulawesi Tenggara","stunting": 28.6 },
+      { "province": "Sumatera Utara",   "stunting": 25.8 },
+      { "province": "Jawa Barat",       "stunting": 24.5 },
+      { "province": "DI Yogyakarta",    "stunting": 17.4 },
+      { "province": "DKI Jakarta",      "stunting": 16.8 },
+      { "province": "Bali",             "stunting": 10.9 }
+    ],
+    "source": "ssgi",
+    "year": 2023
+  },
+  "health_facilities": {
+    "hospitals_by_province": [
+      { "province": "Jawa Barat",       "hospitals": 358, "puskesmas": 1108 },
+      { "province": "Jawa Timur",       "hospitals": 378, "puskesmas": 977 },
+      { "province": "Jawa Tengah",      "hospitals": 315, "puskesmas": 879 },
+      { "province": "DKI Jakarta",      "hospitals": 193, "puskesmas": 340 },
+      { "province": "Sumatera Utara",   "hospitals": 224, "puskesmas": 603 },
+      { "province": "Banten",           "hospitals": 128, "puskesmas": 245 },
+      { "province": "Sulawesi Selatan", "hospitals": 117, "puskesmas": 478 },
+      { "province": "Kalimantan Timur", "hospitals": 88,  "puskesmas": 193 },
+      { "province": "Riau",             "hospitals": 94,  "puskesmas": 234 },
+      { "province": "Sumatera Selatan", "hospitals": 98,  "puskesmas": 342 },
+      { "province": "NTT",              "hospitals": 51,  "puskesmas": 427 },
+      { "province": "Papua",            "hospitals": 46,  "puskesmas": 392 },
+      { "province": "DI Yogyakarta",    "hospitals": 82,  "puskesmas": 121 },
+      { "province": "Bali",             "hospitals": 74,  "puskesmas": 120 },
+      { "province": "Kalimantan Selatan","hospitals": 71,  "puskesmas": 243 }
+    ],
+    "health_workers_by_region": [
+      { "region": "Jawa",              "doctors": 97240, "nurses": 186540, "midwives": 142310 },
+      { "region": "Sumatera",          "doctors": 28640, "nurses": 68920,  "midwives": 58410 },
+      { "region": "Kalimantan",        "doctors": 9870,  "nurses": 26140,  "midwives": 19820 },
+      { "region": "Sulawesi",          "doctors": 12430, "nurses": 34280,  "midwives": 26940 },
+      { "region": "Bali & Nusa Tenggara","doctors": 8240,"nurses": 21640,  "midwives": 17820 },
+      { "region": "Maluku",            "doctors": 2140,  "nurses": 7840,   "midwives": 5420 },
+      { "region": "Papua",             "doctors": 3210,  "nurses": 9840,   "midwives": 6240 }
+    ],
+    "source": "kemenkes",
+    "year": 2023
+  },
+  "comparison": {
+    "province_yearly": [
+      {
+        "province": "Jawa Barat",
+        "data": [
+          { "year": 2018, "dbd": 22100, "tbc": 138000, "malaria": 140, "stunting": 29.1, "imr": 16.2, "immunization": 74.2, "hospitals": 320, "puskesmas": 1020 },
+          { "year": 2019, "dbd": 28500, "tbc": 142000, "malaria": 130, "stunting": 26.4, "imr": 15.8, "immunization": 76.1, "hospitals": 330, "puskesmas": 1050 },
+          { "year": 2020, "dbd": 21000, "tbc": 98000,  "malaria": 125, "stunting": 25.8, "imr": 15.1, "immunization": 72.4, "hospitals": 338, "puskesmas": 1070 },
+          { "year": 2021, "dbd": 18400, "tbc": 110000, "malaria": 122, "stunting": 24.5, "imr": 14.9, "immunization": 77.8, "hospitals": 345, "puskesmas": 1085 },
+          { "year": 2022, "dbd": 25800, "tbc": 138000, "malaria": 121, "stunting": 24.5, "imr": 14.8, "immunization": 78.9, "hospitals": 352, "puskesmas": 1100 },
+          { "year": 2023, "dbd": 26840, "tbc": 151672, "malaria": 120, "stunting": 24.5, "imr": 14.7, "immunization": 79.8, "hospitals": 358, "puskesmas": 1108 }
+        ]
+      },
+      {
+        "province": "Jawa Timur",
+        "data": [
+          { "year": 2018, "dbd": 12400, "tbc": 98000,  "malaria": 250, "stunting": 32.8, "imr": 15.6, "immunization": 75.1, "hospitals": 345, "puskesmas": 910 },
+          { "year": 2019, "dbd": 18200, "tbc": 102000, "malaria": 235, "stunting": 30.2, "imr": 15.1, "immunization": 77.0, "hospitals": 352, "puskesmas": 930 },
+          { "year": 2020, "dbd": 14600, "tbc": 72000,  "malaria": 228, "stunting": 29.1, "imr": 14.5, "immunization": 73.8, "hospitals": 360, "puskesmas": 944 },
+          { "year": 2021, "dbd": 12100, "tbc": 82000,  "malaria": 218, "stunting": 28.4, "imr": 14.2, "immunization": 78.4, "hospitals": 368, "puskesmas": 958 },
+          { "year": 2022, "dbd": 15500, "tbc": 104000, "malaria": 213, "stunting": 27.3, "imr": 14.0, "immunization": 79.8, "hospitals": 373, "puskesmas": 968 },
+          { "year": 2023, "dbd": 16210, "tbc": 114350, "malaria": 210, "stunting": 26.4, "imr": 13.9, "immunization": 80.4, "hospitals": 378, "puskesmas": 977 }
+        ]
+      },
+      {
+        "province": "DKI Jakarta",
+        "data": [
+          { "year": 2018, "dbd": 8200,  "tbc": 62000,  "malaria": 110, "stunting": 20.9, "imr": 11.2, "immunization": 83.4, "hospitals": 175, "puskesmas": 322 },
+          { "year": 2019, "dbd": 11400, "tbc": 65000,  "malaria": 104, "stunting": 19.2, "imr": 10.8, "immunization": 85.6, "hospitals": 180, "puskesmas": 328 },
+          { "year": 2020, "dbd": 8900,  "tbc": 45000,  "malaria": 100, "stunting": 18.5, "imr": 10.4, "immunization": 82.1, "hospitals": 184, "puskesmas": 332 },
+          { "year": 2021, "dbd": 7600,  "tbc": 52000,  "malaria": 98,  "stunting": 17.8, "imr": 10.1, "immunization": 86.2, "hospitals": 188, "puskesmas": 336 },
+          { "year": 2022, "dbd": 9800,  "tbc": 65000,  "malaria": 96,  "stunting": 17.2, "imr": 9.9,  "immunization": 87.8, "hospitals": 191, "puskesmas": 338 },
+          { "year": 2023, "dbd": 10280, "tbc": 72450,  "malaria": 95,  "stunting": 16.8, "imr": 9.8,  "immunization": 88.6, "hospitals": 193, "puskesmas": 340 }
+        ]
+      },
+      {
+        "province": "Papua",
+        "data": [
+          { "year": 2018, "dbd": 980,  "tbc": 15400, "malaria": 112400, "stunting": 34.8, "imr": 43.2, "immunization": 34.2, "hospitals": 38, "puskesmas": 360 },
+          { "year": 2019, "dbd": 1050, "tbc": 16200, "malaria": 108200, "stunting": 32.6, "imr": 42.1, "immunization": 36.8, "hospitals": 40, "puskesmas": 368 },
+          { "year": 2020, "dbd": 880,  "tbc": 12400, "malaria": 104600, "stunting": 31.4, "imr": 41.0, "immunization": 33.4, "hospitals": 41, "puskesmas": 372 },
+          { "year": 2021, "dbd": 1020, "tbc": 14800, "malaria": 108000, "stunting": 30.8, "imr": 40.1, "immunization": 38.2, "hospitals": 43, "puskesmas": 378 },
+          { "year": 2022, "dbd": 1140, "tbc": 18200, "malaria": 104200, "stunting": 30.2, "imr": 38.9, "immunization": 40.4, "hospitals": 44, "puskesmas": 386 },
+          { "year": 2023, "dbd": 1240, "tbc": 19870, "malaria": 98450,  "stunting": 29.5, "imr": 38.2, "immunization": 41.8, "hospitals": 46, "puskesmas": 392 }
+        ]
+      },
+      {
+        "province": "NTT",
+        "data": [
+          { "year": 2018, "dbd": 1620, "tbc": 17400, "malaria": 54200, "stunting": 42.6, "imr": 33.2, "immunization": 44.8, "hospitals": 42, "puskesmas": 402 },
+          { "year": 2019, "dbd": 2040, "tbc": 18200, "malaria": 51800, "stunting": 40.8, "imr": 32.1, "immunization": 46.2, "hospitals": 44, "puskesmas": 408 },
+          { "year": 2020, "dbd": 1580, "tbc": 13600, "malaria": 49400, "stunting": 39.6, "imr": 31.0, "immunization": 43.8, "hospitals": 45, "puskesmas": 412 },
+          { "year": 2021, "dbd": 1820, "tbc": 16800, "malaria": 50200, "stunting": 38.9, "imr": 29.8, "immunization": 47.4, "hospitals": 47, "puskesmas": 418 },
+          { "year": 2022, "dbd": 2080, "tbc": 20400, "malaria": 48200, "stunting": 38.2, "imr": 28.9, "immunization": 51.2, "hospitals": 49, "puskesmas": 422 },
+          { "year": 2023, "dbd": 2140, "tbc": 21340, "malaria": 46210, "stunting": 37.8, "imr": 28.4, "immunization": 52.6, "hospitals": 51, "puskesmas": 427 }
+        ]
+      },
+      {
+        "province": "Bali",
+        "data": [
+          { "year": 2018, "dbd": 3820, "tbc": 9200,  "malaria": 85,  "stunting": 16.2, "imr": 12.4, "immunization": 84.2, "hospitals": 64, "puskesmas": 112 },
+          { "year": 2019, "dbd": 5100, "tbc": 9800,  "malaria": 80,  "stunting": 15.4, "imr": 12.0, "immunization": 86.4, "hospitals": 66, "puskesmas": 114 },
+          { "year": 2020, "dbd": 3960, "tbc": 7200,  "malaria": 76,  "stunting": 14.8, "imr": 11.6, "immunization": 84.8, "hospitals": 68, "puskesmas": 116 },
+          { "year": 2021, "dbd": 3240, "tbc": 7800,  "malaria": 74,  "stunting": 14.2, "imr": 11.2, "immunization": 87.6, "hospitals": 70, "puskesmas": 117 },
+          { "year": 2022, "dbd": 4210, "tbc": 9200,  "malaria": 72,  "stunting": 13.0, "imr": 10.6, "immunization": 88.4, "hospitals": 72, "puskesmas": 119 },
+          { "year": 2023, "dbd": 4420, "tbc": 10100, "malaria": 70,  "stunting": 10.9, "imr": 10.2, "immunization": 89.1, "hospitals": 74, "puskesmas": 120 }
+        ]
+      },
+      {
+        "province": "Sumatera Utara",
+        "data": [
+          { "year": 2018, "dbd": 4820, "tbc": 40200, "malaria": 5600, "stunting": 30.1, "imr": 24.8, "immunization": 61.4, "hospitals": 204, "puskesmas": 568 },
+          { "year": 2019, "dbd": 6240, "tbc": 42400, "malaria": 5400, "stunting": 28.4, "imr": 23.8, "immunization": 63.8, "hospitals": 210, "puskesmas": 578 },
+          { "year": 2020, "dbd": 4960, "tbc": 30400, "malaria": 5200, "stunting": 27.6, "imr": 22.9, "immunization": 61.2, "hospitals": 214, "puskesmas": 584 },
+          { "year": 2021, "dbd": 4200, "tbc": 34800, "malaria": 5100, "stunting": 26.8, "imr": 22.1, "immunization": 65.4, "hospitals": 218, "puskesmas": 592 },
+          { "year": 2022, "dbd": 5480, "tbc": 42200, "malaria": 4960, "stunting": 26.2, "imr": 21.6, "immunization": 66.8, "hospitals": 221, "puskesmas": 598 },
+          { "year": 2023, "dbd": 6340, "tbc": 48210, "malaria": 4820, "stunting": 25.8, "imr": 21.3, "immunization": 68.2, "hospitals": 224, "puskesmas": 603 }
+        ]
+      },
+      {
+        "province": "Sulawesi Selatan",
+        "data": [
+          { "year": 2018, "dbd": 3100, "tbc": 30200, "malaria": 11400, "stunting": 34.2, "imr": 26.4, "immunization": 60.2, "hospitals": 102, "puskesmas": 448 },
+          { "year": 2019, "dbd": 4200, "tbc": 32400, "malaria": 10800, "stunting": 32.4, "imr": 25.6, "immunization": 62.4, "hospitals": 106, "puskesmas": 454 },
+          { "year": 2020, "dbd": 3400, "tbc": 23200, "malaria": 10600, "stunting": 31.2, "imr": 24.8, "immunization": 60.8, "hospitals": 108, "puskesmas": 458 },
+          { "year": 2021, "dbd": 2980, "tbc": 26400, "malaria": 10400, "stunting": 30.4, "imr": 24.2, "immunization": 63.8, "hospitals": 112, "puskesmas": 462 },
+          { "year": 2022, "dbd": 3640, "tbc": 34200, "malaria": 10100, "stunting": 29.2, "imr": 23.6, "immunization": 65.4, "hospitals": 115, "puskesmas": 470 },
+          { "year": 2023, "dbd": 4210, "tbc": 38640, "malaria": 9840,  "stunting": 28.4, "imr": 23.0, "immunization": 66.8, "hospitals": 117, "puskesmas": 478 }
+        ]
+      }
+    ],
+    "indicators_meta": {
+      "dbd":          { "label": "Kasus DBD",              "unit": "kasus",         "color": "#ef4444" },
+      "tbc":          { "label": "Kasus TBC",              "unit": "kasus",         "color": "#1a56db" },
+      "malaria":      { "label": "Kasus Malaria",          "unit": "kasus",         "color": "#0e9f6e" },
+      "stunting":     { "label": "Prevalensi Stunting",    "unit": "%",             "color": "#f59e0b" },
+      "imr":          { "label": "Angka Kematian Bayi",    "unit": "per 1.000 KH",  "color": "#7c3aed" },
+      "immunization": { "label": "Cakupan Imunisasi",      "unit": "%",             "color": "#0891b2" },
+      "hospitals":    { "label": "Jumlah Rumah Sakit",     "unit": "unit",          "color": "#be185d" },
+      "puskesmas":    { "label": "Jumlah Puskesmas",       "unit": "unit",          "color": "#065f46" }
+    }
+  },
+  "filter_options": {
+    "provinces": [
+      "Semua Provinsi",
+      "Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Jambi",
+      "Sumatera Selatan", "Bengkulu", "Lampung", "Kepulauan Bangka Belitung", "Kepulauan Riau",
+      "DKI Jakarta", "Jawa Barat", "Jawa Tengah", "DI Yogyakarta", "Jawa Timur", "Banten",
+      "Bali", "NTB", "NTT",
+      "Kalimantan Barat", "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Utara",
+      "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Selatan", "Sulawesi Tenggara", "Gorontalo", "Sulawesi Barat",
+      "Maluku", "Maluku Utara",
+      "Papua Barat", "Papua"
+    ],
+    "years": [2018, 2019, 2020, 2021, 2022, 2023],
+    "categories": [
+      "Semua Kategori",
+      "Penyakit Menular",
+      "Kesehatan Ibu & Anak",
+      "Gizi & Stunting",
+      "Fasilitas Kesehatan"
+    ],
+    "indicators": {
+      "Penyakit Menular": ["DBD", "TBC", "Malaria"],
+      "Kesehatan Ibu & Anak": ["Angka Kematian Ibu", "Angka Kematian Bayi", "Cakupan Imunisasi"],
+      "Gizi & Stunting": ["Stunting", "Wasting", "Underweight", "Overweight"],
+      "Fasilitas Kesehatan": ["Rumah Sakit", "Puskesmas", "Dokter", "Perawat", "Bidan"]
+    }
+  }
+}

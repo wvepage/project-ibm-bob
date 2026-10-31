@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indonesia Health Insight Dashboard</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">HealthInsight</div>
+        <div class="brand-sub">Indonesia 2023</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-section="overview" onclick="navigateTo('overview')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Ringkasan</span>
+      </button>
+
+      <button class="nav-item" data-section="diseases" onclick="navigateTo('diseases')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>Penyakit Menular</span>
+      </button>
+
+      <button class="nav-item" data-section="maternal" onclick="navigateTo('maternal')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span>Kesehatan Ibu & Anak</span>
+      </button>
+
+      <button class="nav-item" data-section="nutrition" onclick="navigateTo('nutrition')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <span>Gizi & Stunting</span>
+      </button>
+
+      <button class="nav-item" data-section="facilities" onclick="navigateTo('facilities')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Fasilitas Kesehatan</span>
+      </button>
+
+      <button class="nav-item" data-section="comparison" onclick="navigateTo('comparison')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+        <span>Perbandingan</span>
+      </button>
+
+      <button class="nav-item" data-section="sources" onclick="navigateTo('sources')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span>Sumber Data</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="text-xs text-gray-400 leading-relaxed">
+        Data resmi Kemenkes RI & BPS<br/>Periode 2018–2023
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== SIDEBAR OVERLAY (mobile) ===== -->
+  <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== HEADER ===== -->
+    <header class="dashboard-header">
+      <div class="header-left">
+        <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div>
+          <h1 class="header-title">Indonesia Health Insight Dashboard</h1>
+          <p class="header-sub">Data Statistik Kesehatan Masyarakat Indonesia · Periode 2018–2023</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="header-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Diperbarui: 2024
+        </span>
+      </div>
+    </header>
+
+    <!-- ===== FILTER BAR ===== -->
+    <div class="filter-bar">
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label class="filter-label">Provinsi</label>
+          <select id="filterProvince" class="filter-select" onchange="applyFilters()">
+            <option value="">Semua Provinsi</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Tahun</label>
+          <select id="filterYear" class="filter-select" onchange="applyFilters()">
+            <option value="">Semua Tahun</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Kategori</label>
+          <select id="filterCategory" class="filter-select" onchange="applyFilters()">
+            <option value="">Semua Kategori</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Indikator</label>
+          <select id="filterIndicator" class="filter-select" onchange="applyFilters()">
+            <option value="">Semua Indikator</option>
+          </select>
+        </div>
+        <div class="filter-group filter-actions">
+          <button class="btn-reset" onclick="resetFilters()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M1 4v6h6"/><path d="M23 20v-6h-6"/>
+              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+            </svg>
+            Reset Filter
+          </button>
+        </div>
+      </div>
+      <div id="filterInfo" class="filter-info hidden"></div>
+    </div>
+
+    <!-- ===== CONTENT AREA ===== -->
+    <main class="content-area">
+
+      <!-- ========== SECTION: OVERVIEW ========== -->
+      <section id="section-overview" class="dashboard-section active">
+        <div class="section-header">
+          <h2 class="section-title">Ringkasan Kesehatan Nasional</h2>
+          <p class="section-desc">Indikator utama kondisi kesehatan masyarakat Indonesia</p>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid" id="kpiGrid">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Overview Charts Row -->
+        <div class="chart-row-2">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Tren Kasus Penyakit Menular (2018–2023)</h3>
+              <span class="chart-source">Sumber: Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartDiseaseTrendOverview"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Status Gizi Nasional 2023</h3>
+              <span class="chart-source">Sumber: SSGI – Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartNutritionOverview"></canvas></div>
+          </div>
+        </div>
+
+        <div class="chart-row-2">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Tren Cakupan Imunisasi Anak (%)</h3>
+              <span class="chart-source">Sumber: Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartImmunizationOverview"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Tren Prevalensi Stunting (%)</h3>
+              <span class="chart-source">Sumber: SSGI – Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartStuntingTrendOverview"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION: DISEASES ========== -->
+      <section id="section-diseases" class="dashboard-section">
+        <div class="section-header">
+          <h2 class="section-title">Penyakit Menular</h2>
+          <p class="section-desc">Data kasus DBD, TBC, dan Malaria di Indonesia</p>
+        </div>
+
+        <div class="chart-row-2">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Tren Kasus Penyakit Menular per Tahun</h3>
+              <span class="chart-source">Sumber: Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartDiseaseTrend"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Perbandingan Kasus DBD, TBC & Malaria (2023)</h3>
+              <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartDiseaseCompare"></canvas></div>
+          </div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Top 10 Provinsi – Jumlah Kasus Penyakit Terbanyak (2023)</h3>
+            <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+          </div>
+          <div class="chart-wrap chart-tall"><canvas id="chartDiseaseProvince"></canvas></div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Distribusi Kasus Malaria per Provinsi (2023)</h3>
+            <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+          </div>
+          <div class="chart-wrap"><canvas id="chartMalariaProvince"></canvas></div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION: MATERNAL & CHILD ========== -->
+      <section id="section-maternal" class="dashboard-section">
+        <div class="section-header">
+          <h2 class="section-title">Kesehatan Ibu & Anak</h2>
+          <p class="section-desc">Angka kematian ibu, kematian bayi, dan cakupan imunisasi</p>
+        </div>
+
+        <div class="kpi-grid-3" id="maternalKpi"></div>
+
+        <div class="chart-row-2">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Tren Jumlah Kematian Ibu per Tahun</h3>
+              <span class="chart-source">Sumber: Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartMMR"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Tren Angka Kematian Bayi (per 1.000 KH)</h3>
+              <span class="chart-source">Sumber: BPS</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartIMR"></canvas></div>
+          </div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Tren Cakupan Imunisasi Anak (%)</h3>
+            <span class="chart-source">Sumber: Kemenkes RI</span>
+          </div>
+          <div class="chart-wrap"><canvas id="chartImmunization"></canvas></div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Perbandingan Indikator KIA Antarprovinsi</h3>
+            <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+          </div>
+          <div class="chart-wrap chart-tall"><canvas id="chartMaternalProvince"></canvas></div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION: NUTRITION ========== -->
+      <section id="section-nutrition" class="dashboard-section">
+        <div class="section-header">
+          <h2 class="section-title">Gizi & Stunting</h2>
+          <p class="section-desc">Prevalensi stunting dan status gizi masyarakat Indonesia</p>
+        </div>
+
+        <div class="chart-row-2">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Tren Prevalensi Stunting Nasional (%)</h3>
+              <span class="chart-source">Sumber: SSGI – Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartStuntingTrend"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Perbandingan Status Gizi Nasional 2023</h3>
+              <span class="chart-source">Sumber: SSGI – Kemenkes RI</span>
+            </div>
+            <div class="chart-wrap"><canvas id="chartNutritionStatus"></canvas></div>
+          </div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Top 10 Provinsi – Prevalensi Stunting Tertinggi (%)</h3>
+            <span class="chart-source">Sumber: SSGI – Kemenkes RI · 2023</span>
+          </div>
+          <div class="chart-wrap chart-tall"><canvas id="chartStuntingProvince"></canvas></div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Prevalensi Stunting Seluruh Provinsi (%)</h3>
+            <span class="chart-source">Sumber: SSGI – Kemenkes RI · 2023</span>
+          </div>
+          <div class="chart-wrap chart-tall"><canvas id="chartStuntingAll"></canvas></div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION: FACILITIES ========== -->
+      <section id="section-facilities" class="dashboard-section">
+        <div class="section-header">
+          <h2 class="section-title">Fasilitas Kesehatan</h2>
+          <p class="section-desc">Distribusi rumah sakit, puskesmas, dan tenaga kesehatan</p>
+        </div>
+
+        <div class="chart-row-2">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Jumlah Rumah Sakit per Provinsi (Top 15)</h3>
+              <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+            </div>
+            <div class="chart-wrap chart-tall"><canvas id="chartHospitals"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Jumlah Puskesmas per Provinsi (Top 15)</h3>
+              <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+            </div>
+            <div class="chart-wrap chart-tall"><canvas id="chartPuskesmas"></canvas></div>
+          </div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Perbandingan Tenaga Kesehatan Antarwilayah</h3>
+            <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+          </div>
+          <div class="chart-wrap"><canvas id="chartHealthWorkers"></canvas></div>
+        </div>
+
+        <div class="chart-card chart-full">
+          <div class="chart-card-header">
+            <h3 class="chart-title">Perbandingan RS vs Puskesmas per Provinsi</h3>
+            <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+          </div>
+          <div class="chart-wrap"><canvas id="chartFacilitiesCompare"></canvas></div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION: COMPARISON ========== -->
+      <section id="section-comparison" class="dashboard-section">
+        <div class="section-header">
+          <h2 class="section-title">Perbandingan Data Kesehatan</h2>
+          <p class="section-desc">Bandingkan indikator kesehatan antarprovinsi atau perkembangan antar tahun secara interaktif</p>
+        </div>
+
+        <!-- ── Mode Tabs ── -->
+        <div class="comp-tabs">
+          <button class="comp-tab active" data-mode="province" onclick="switchCompMode('province')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Perbandingan Antarprovinsi
+          </button>
+          <button class="comp-tab" data-mode="year" onclick="switchCompMode('year')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Tren Berdasarkan Tahun
+          </button>
+        </div>
+
+        <!-- ── Province Comparison Mode ── -->
+        <div id="compModeProvince" class="comp-mode active">
+
+          <!-- ── Sub-mode pills: "Pada Tahun yang Sama" vs "Tren Semua Tahun" ── -->
+          <div class="submode-pills">
+            <button class="submode-pill active" data-sub="sameyear" onclick="switchProvinceSubMode('sameyear')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+              </svg>
+              Pada Tahun yang Sama
+            </button>
+            <button class="submode-pill" data-sub="trend" onclick="switchProvinceSubMode('trend')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+              Tren Semua Tahun
+            </button>
+          </div>
+
+          <!-- ── SUB-MODE A: Pada Tahun yang Sama ── -->
+          <div id="subModeSameYear" class="submode-content active">
+            <!-- Controls -->
+            <div class="comp-controls">
+              <div class="comp-ctrl-group">
+                <label class="filter-label">Tahun Perbandingan</label>
+                <select id="compSameYear" class="filter-select" onchange="renderSameYearComparison()">
+                </select>
+              </div>
+              <div class="comp-ctrl-group">
+                <label class="filter-label">Provinsi A</label>
+                <select id="compProvinceA" class="filter-select" onchange="renderComparisonCharts(); renderSameYearComparison()">
+                </select>
+              </div>
+              <div class="comp-ctrl-group">
+                <label class="filter-label">Provinsi B</label>
+                <select id="compProvinceB" class="filter-select" onchange="renderComparisonCharts(); renderSameYearComparison()">
+                </select>
+              </div>
+            </div>
+
+            <!-- Head-to-head KPI scoreboard -->
+            <div id="h2hScoreboard" class="h2h-scoreboard"></div>
+
+            <!-- All-indicator grouped bar for the chosen year -->
+            <div class="chart-card chart-full">
+              <div class="chart-card-header">
+                <h3 class="chart-title" id="compSameYearBarTitle">Perbandingan Semua Indikator pada Tahun yang Sama</h3>
+                <span class="chart-source" id="compSameYearSource">Sumber: Kemenkes RI · 2023</span>
+              </div>
+              <div class="chart-wrap chart-tall"><canvas id="chartCompSameYear"></canvas></div>
+            </div>
+
+            <!-- Radar snapshot -->
+            <div class="chart-row-2">
+              <div class="chart-card">
+                <div class="chart-card-header">
+                  <h3 class="chart-title" id="compSameYearRadarTitle">Profil Multidimensi pada Tahun yang Sama</h3>
+                  <span class="chart-source">Sumber: Kemenkes RI / SSGI · nilai dinormalisasi</span>
+                </div>
+                <div class="chart-wrap"><canvas id="chartCompSameYearRadar"></canvas></div>
+              </div>
+              <div class="chart-card">
+                <div class="chart-card-header">
+                  <h3 class="chart-title" id="compSameYearWinnerTitle">Skor Head-to-Head per Indikator</h3>
+                  <span class="chart-source">Hijau = lebih baik · Merah = lebih buruk (konteks indikator)</span>
+                </div>
+                <div class="chart-wrap"><canvas id="chartCompSameYearWinner"></canvas></div>
+              </div>
+            </div>
+
+            <!-- Detailed comparison table -->
+            <div class="chart-card chart-full">
+              <div class="chart-card-header">
+                <h3 class="chart-title" id="compSameYearTableTitle">Tabel Perbandingan Detail Antarprovinsi</h3>
+                <span class="chart-source">Sumber: Kemenkes RI / BPS / SSGI</span>
+              </div>
+              <div id="compSameYearTable" style="overflow-x:auto"></div>
+            </div>
+          </div>
+
+          <!-- ── SUB-MODE B: Tren Semua Tahun ── -->
+          <div id="subModeTrend" class="submode-content">
+            <!-- Controls -->
+            <div class="comp-controls">
+              <div class="comp-ctrl-group">
+                <label class="filter-label">Indikator</label>
+                <select id="compIndicator" class="filter-select" onchange="renderComparisonCharts()">
+                  <option value="dbd">Kasus DBD</option>
+                  <option value="tbc">Kasus TBC</option>
+                  <option value="malaria">Kasus Malaria</option>
+                  <option value="stunting">Prevalensi Stunting (%)</option>
+                  <option value="imr">Angka Kematian Bayi</option>
+                  <option value="immunization">Cakupan Imunisasi (%)</option>
+                  <option value="hospitals">Jumlah Rumah Sakit</option>
+                  <option value="puskesmas">Jumlah Puskesmas</option>
+                </select>
+              </div>
+              <div class="comp-ctrl-group">
+                <label class="filter-label">Provinsi C (opsional)</label>
+                <select id="compProvinceC" class="filter-select" onchange="renderComparisonCharts()">
+                  <option value="">— Tidak dipilih —</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Summary stat cards -->
+            <div id="compStatCards" class="comp-stat-grid"></div>
+
+            <!-- Province trend line chart -->
+            <div class="chart-card chart-full">
+              <div class="chart-card-header">
+                <h3 class="chart-title" id="compTrendTitle">Tren Indikator Antarprovinsi (2018–2023)</h3>
+                <span class="chart-source">Sumber: Kemenkes RI / BPS / SSGI</span>
+              </div>
+              <div class="chart-wrap" style="height:300px"><canvas id="chartCompTrend"></canvas></div>
+            </div>
+
+            <!-- Side-by-side bar for latest year -->
+            <div class="chart-row-2">
+              <div class="chart-card">
+                <div class="chart-card-header">
+                  <h3 class="chart-title" id="compBarTitle">Perbandingan Nilai Terbaru Antarprovinsi</h3>
+                  <span class="chart-source">Sumber: Kemenkes RI · 2023</span>
+                </div>
+                <div class="chart-wrap"><canvas id="chartCompBar"></canvas></div>
+              </div>
+              <div class="chart-card">
+                <div class="chart-card-header">
+                  <h3 class="chart-title">Profil Multidimensi Provinsi (Radar)</h3>
+                  <span class="chart-source">Sumber: Kemenkes RI / SSGI · 2023</span>
+                </div>
+                <div class="chart-wrap"><canvas id="chartCompRadar"></canvas></div>
+              </div>
+            </div>
+
+            <!-- Delta table -->
+            <div class="chart-card chart-full">
+              <div class="chart-card-header">
+                <h3 class="chart-title">Tabel Perubahan Nilai per Tahun</h3>
+                <span class="chart-source">Sumber: Kemenkes RI · 2018–2023</span>
+              </div>
+              <div id="compDeltaTable" style="overflow-x:auto"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Year Comparison Mode ── -->
+        <div id="compModeYear" class="comp-mode">
+          <div class="comp-controls">
+            <div class="comp-ctrl-group">
+              <label class="filter-label">Provinsi</label>
+              <select id="compYearProvince" class="filter-select" onchange="renderYearComparisonCharts()">
+              </select>
+            </div>
+            <div class="comp-ctrl-group">
+              <label class="filter-label">Tahun A</label>
+              <select id="compYearA" class="filter-select" onchange="renderYearComparisonCharts()">
+              </select>
+            </div>
+            <div class="comp-ctrl-group">
+              <label class="filter-label">Tahun B</label>
+              <select id="compYearB" class="filter-select" onchange="renderYearComparisonCharts()">
+              </select>
+            </div>
+          </div>
+
+          <!-- Year-delta summary cards -->
+          <div id="yearDeltaCards" class="comp-stat-grid"></div>
+
+          <!-- Grouped bar: all indicators year A vs year B -->
+          <div class="chart-card chart-full">
+            <div class="chart-card-header">
+              <h3 class="chart-title" id="yearCompBarTitle">Perbandingan Semua Indikator: Tahun A vs Tahun B</h3>
+              <span class="chart-source">Sumber: Kemenkes RI / BPS / SSGI</span>
+            </div>
+            <div class="chart-wrap chart-tall"><canvas id="chartYearCompBar"></canvas></div>
+          </div>
+
+          <!-- Multi-indicator trend for chosen province -->
+          <div class="chart-card chart-full">
+            <div class="chart-card-header">
+              <h3 class="chart-title" id="yearTrendTitle">Tren Semua Indikator Kesehatan (2018–2023)</h3>
+              <span class="chart-source">Sumber: Kemenkes RI / BPS / SSGI</span>
+            </div>
+            <div class="chart-wrap" style="height:320px"><canvas id="chartYearTrend"></canvas></div>
+          </div>
+
+          <!-- Radar: year A vs year B all indicators -->
+          <div class="chart-row-2">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h3 class="chart-title" id="yearRadarTitle">Radar Multidimensi: Tahun A vs Tahun B</h3>
+                <span class="chart-source">Sumber: Kemenkes RI / SSGI · nilai dinormalisasi</span>
+              </div>
+              <div class="chart-wrap"><canvas id="chartYearRadar"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h3 class="chart-title" id="yearDeltaBarTitle">Perubahan (Δ) Setiap Indikator</h3>
+                <span class="chart-source">Nilai positif = meningkat · negatif = menurun</span>
+              </div>
+              <div class="chart-wrap"><canvas id="chartYearDeltaBar"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION: SOURCES ========== -->
+      <section id="section-sources" class="dashboard-section">
+        <div class="section-header">
+          <h2 class="section-title">Sumber Data</h2>
+          <p class="section-desc">Informasi sumber data resmi yang digunakan dalam dashboard ini</p>
+        </div>
+        <div id="sourcesContent"><!-- Rendered by JS --></div>
+
+        <div class="info-box mt-6">
+          <div class="info-box-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            Catatan Penting
+          </div>
+          <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+            Data yang ditampilkan dalam dashboard ini bersumber dari publikasi resmi pemerintah Indonesia.
+            Seluruh angka statistik menggunakan data yang dapat dipertanggungjawabkan dari Kementerian Kesehatan RI,
+            Badan Pusat Statistik (BPS), dan Survei Status Gizi Indonesia (SSGI).
+            Apabila terdapat perbedaan dengan sumber lain, mohon merujuk langsung ke publikasi resmi instansi terkait.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="dashboard-footer">
+      <p>© 2024 Indonesia Health Insight Dashboard · Data: Kemenkes RI, BPS, SSGI · Dibuat dengan Chart.js & Tailwind CSS</p>
+    </footer>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p class="text-sm text-gray-500 mt-3">Memuat data kesehatan...</p>
+    </div>
+  </div>
+
+  <!-- Error Toast -->
+  <div id="errorToast" class="error-toast hidden">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span id="errorMsg">Gagal memuat data.</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
